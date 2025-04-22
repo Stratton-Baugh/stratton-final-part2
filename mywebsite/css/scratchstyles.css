@@ -64,7 +64,6 @@ body {
 }
 
 .top-right-links a {
-    position: fixed;
   display: block;
   margin-bottom: 10px;
   color: #0077b6;
