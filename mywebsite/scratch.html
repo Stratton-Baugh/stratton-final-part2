@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>How to fly fish</title>
+  <link rel="stylesheet" href="css/scratchstyles.css" />
+</head>
+<body>
+    <!-- Top right corner links -->
+<div class="top-right-links">
+    <a href="../index.html">Check out my professional page</a>
+    <a href="web-app.html">Click here to play Wordle</a>
+  </div>
+  <!--Header-->
+    <div class="header-section">
+  <h1>HOW TO FLY-FISH</h1>
+  <h2>Where serenity meets the strike</h2>
+  </div>
+
+  <!--Anchor-->
+  <p><a href="#gear">Jump to Essential Gear ↓</a></p>
+  <!--Fly fisher image-->
+  <img src="https://www.nps.gov/articles/images/32984028253_82567be333_o.jpg" alt= flyfishing width="900">
+<!--Video-->
+<div class="media-section"></div>
+<iframe width="640" height="360" 
+        src="https://www.youtube.com/embed/NIDi3Kvt0Us" 
+        title="YouTube video player" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+</iframe>  
+</div>
+
+<div class="gear-section" id="gear"></div>
+<h2 id="gear">Essential Gear</h2>
+<OL>
+    <li>Fly rod</li>
+    <li>Fly reel</li>
+    <li>Fly line</li>
+    <li>Line tippet</li>
+    <li>Fly pattern hook</li>
+</OL>
+</div>
+
+<!--Fly pattern Generator-->
+<h2>What fly pattern should you use?</h2>
+<button onclick="generateFly()">Click to find out</button>
+<p id="flyResult" style="font-size: 24px; margin-top: 20px;"></p>
+
+<script>
+  const flyPatterns = [
+    "Elk Hair Caddis",
+    "Parachute Adams",
+    "Woolly Bugger",
+    "Pheasant Tail Nymph",
+    "Royal Wulff",
+    "Hopper Dropper",
+    "Zebra Midge",
+    "Chubby Chernobyl",
+    "Prince Nymph",
+    "Copper John"
+  ];
+
+  function generateFly() {
+    const randomIndex = Math.floor(Math.random() * flyPatterns.length);
+    const selectedFly = flyPatterns[randomIndex];
+    document.getElementById("flyResult").textContent = selectedFly;
+  }
+</script>
+
+<h2>Get HYPED about fly fishing</h2>
+<iframe width="640" height="360" 
+        src="https://www.youtube.com/embed/2dRfHmdFmSI" 
+        title="YouTube video player" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen>
+</iframe>
+
+<!-- Instagram link at the bottom -->
+<footer>
+    <p>Follow me on 
+      <a href="https://www.instagram.com/strattonbaugh/" target="_blank" rel="noopener noreferrer">
+        Instagram
+      </a>
+    </p>
+  </footer>
+</body>
+</html>

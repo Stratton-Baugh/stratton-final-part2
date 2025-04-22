@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Stratton's Wordle</title>
+  <style>
+    body {
+      background-color: #b7cce9;
+      color: white;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .board {
+      display: grid;
+      grid-template-rows: repeat(6, 1fr);
+      gap: 10px;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+    }
+
+    .cell {
+      width: 60px;
+      height: 60px;
+      border: 2px solid #3a3a3c;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2em;
+      text-transform: uppercase;
+      background: #121213;
+    }
+
+    .correct {
+      background-color: #538d4e !important;
+      border-color: #538d4e !important;
+    }
+
+    .present {
+      background-color: #b59f3b !important;
+      border-color: #b59f3b !important;
+    }
+
+    .absent {
+      background-color: #3a3a3c !important;
+      border-color: #3a3a3c !important;
+    }
+
+    #message {
+      margin-top: 20px;
+      font-size: 1.2em;
+    }
+
+    
+  </style>
+</head>
+<!--Return Home Button-->
+<a href="scratch.html">
+  <button style="background-color: #4CAF50; color: white; font-size: 1.2em; padding: 10px 20px; border: none; cursor: pointer; margin-top: 20px;">
+    Go Back
+  </button>
+</a>
+<!--Game-->
+<body>
+  <h1>Stratton's Wordle</h1>
+  <div class="board" id="board"></div>
+  <div id="message"></div>
+
+  <script>
+    const WORD = "SNAKE";
+    const MAX_GUESSES = 6;
+    let currentRow = 0;
+    let currentCol = 0;
+    let gameOver = false;
+    let guesses = Array(MAX_GUESSES).fill("");
+
+    const board = document.getElementById('board');
+    const message = document.getElementById('message');
+
+    // Build board
+    for (let i = 0; i < MAX_GUESSES; i++) {
+      const row = document.createElement('div');
+      row.classList.add('row');
+      for (let j = 0; j < 5; j++) {
+        const cell = document.createElement('div');
+        cell.classList.add('cell');
+        cell.id = `cell-${i}-${j}`;
+        row.appendChild(cell);
+      }
+      board.appendChild(row);
+    }
+
+    function handleKeyPress(e) {
+      if (gameOver || currentRow >= MAX_GUESSES) return;
+
+      const key = e.key;
+
+      if (key === 'Backspace' && currentCol > 0) {
+        currentCol--;
+        guesses[currentRow] = guesses[currentRow].slice(0, -1);
+        document.getElementById(`cell-${currentRow}-${currentCol}`).textContent = '';
+      } else if (/^[a-zA-Z]$/.test(key) && currentCol < 5) {
+        const letter = key.toUpperCase();
+        guesses[currentRow] += letter;
+        document.getElementById(`cell-${currentRow}-${currentCol}`).textContent = letter;
+        currentCol++;
+      } else if (key === 'Enter' && currentCol === 5) {
+        checkGuess();
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyPress);
+
+    function checkGuess() {
+      const guess = guesses[currentRow];
+      const wordArr = WORD.split('');
+      const guessArr = guess.split('');
+      const result = Array(5).fill('absent');
+
+      // First pass: check correct positions
+      for (let i = 0; i < 5; i++) {
+        if (guessArr[i] === wordArr[i]) {
+          result[i] = 'correct';
+          wordArr[i] = null; // prevent duplicate match
+        }
+      }
+
+      // Second pass: check present letters
+      for (let i = 0; i < 5; i++) {
+        if (result[i] === 'correct') continue;
+        if (wordArr.includes(guessArr[i])) {
+          result[i] = 'present';
+          wordArr[wordArr.indexOf(guessArr[i])] = null;
+        }
+      }
+
+      // Apply classes
+      for (let i = 0; i < 5; i++) {
+        const cell = document.getElementById(`cell-${currentRow}-${i}`);
+        cell.classList.add(result[i]);
+      }
+
+      // Check for win/loss
+      if (guess === WORD) {
+        message.textContent = "🎉 You guessed it!";
+        gameOver = true;
+      } else if (currentRow === MAX_GUESSES - 1) {
+        message.textContent = `💀 Game over! The word was ${WORD}`;
+        gameOver = true;
+      } else {
+        currentRow++;
+        currentCol = 0;
+      }
+    }
+  </script>
+</body>
+</html>

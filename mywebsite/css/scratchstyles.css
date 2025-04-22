@@ -1,0 +1,77 @@
+body {
+    font-family: 'Georgia', serif;
+    font-size: 18px;
+    color: #2c3e50; /* Deep blue-gray font color */
+    background-color: #eaf4f4; /* Soft, light blue/green background */
+    margin: 0;
+    padding: 60px 20px; /* Add spacing at top and bottom */
+    text-align: center;
+  }
+  
+  /* Headings */
+  h1 {
+    font-size: 48px;
+    color: #1a2e3b;
+    margin-bottom: 10px;
+  }
+  
+  h2 {
+    font-size: 28px;
+    color: #2c3e50;
+    margin-top: 30px;
+  }
+  
+  /* Center and style image */
+  img {
+    display: block;
+    margin: 30px auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Center videos */
+  iframe {
+    display: block;
+    margin: 30px auto;
+    border: none;
+  }
+  
+  /* Ordered list styling */
+  ol {
+    list-style-position: inside;
+    margin: 0 auto;
+    padding: 0;
+    max-width: 400px;
+    text-align: left;
+  }
+
+
+  a {
+    color: #0077b6;
+    text-decoration: none;
+  }
+  
+  a:hover {
+    text-decoration: underline;
+  }
+
+  /* Position the top-right links */
+.top-right-links {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 10; /* Make sure links are on top of other content */
+}
+
+.top-right-links a {
+  display: block;
+  margin-bottom: 10px;
+  color: #0077b6;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.top-right-links a:hover {
+  text-decoration: underline;
+}
+  
